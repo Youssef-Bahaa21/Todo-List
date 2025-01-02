@@ -1,0 +1,61 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+
+  background: #c34c3e;
+  background: linear-gradient(270deg, #c34c3e, #378362);
+  color: white;
+}
+header {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.text-center {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+input,
+select,
+button {
+  border-radius: 8px;
+}
+
+#mybtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#mybtn:hover {
+  background-color: #28a745;
+}
+
+#todos-container .d-flex {
+  transition: transform 0.2s;
+}
+
+#todos-container .d-flex:hover {
+  transform: scale(1.02);
+}
+
+button {
+  cursor: pointer;
+}
+
+button i {
+  pointer-events: none;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.is-invalid {
+  border: red 2px solid;
+  background-color: rgba(255, 0, 0, 0.342);
+}
