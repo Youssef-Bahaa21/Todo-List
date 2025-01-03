@@ -3,171 +3,59 @@
 *::before {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
-  background-color: rgb(70, 68, 68);
+
+  background: #c34c3e;
+  background: linear-gradient(270deg, #c34c3e, #378362);
   color: white;
-  font-family: Arial, sans-serif;
+}
+header {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.container {
-  padding: 20px;
-}
-
-.upload {
-  display: flex;
-  justify-content: center;
-  flex: 1;
-}
-
-.imgbox img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.filters {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.filters label {
+.text-center {
+  font-size: 40px;
   font-weight: bold;
 }
 
-.filters input[type="range"] {
-  width: 100%;
-  appearance: none; /* Removes native browser styling */
+input,
+select,
+button {
+  border-radius: 8px;
 }
 
-.filters input[type="range"]::-webkit-slider-thumb {
-  width: 18px; /* Increase thumb width */
-  height: 18px; /* Increase thumb height */
-  background-color: #007bff; /* Blue color */
-  border: 1px solid #007bff; /* Border color to match blue */
-  border-radius: 50%; /* Round thumb shape */
+#mybtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#mybtn:hover {
+  background-color: #28a745;
+}
+
+#todos-container .d-flex {
+  transition: transform 0.2s;
+}
+
+#todos-container .d-flex:hover {
+  transform: scale(1.02);
+}
+
+button {
   cursor: pointer;
 }
 
-.filters input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  background-color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 50%;
-  cursor: pointer;
+button i {
+  pointer-events: none;
 }
 
-.filters input[type="range"]::-ms-thumb {
-  width: 18px;
-  height: 18px;
-  background-color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 50%;
-  cursor: pointer;
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
 }
-
-.filters input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8px;
-  background-color: rgba(0, 123, 255, 0.3); /* Background color for track */
-}
-
-.filters input[type="range"]::-moz-range-track {
-  width: 100%;
-  height: 8px;
-  background-color: rgba(0, 123, 255, 0.3);
-}
-
-.filters input[type="range"]::-ms-track {
-  width: 100%;
-  height: 8px;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-
-.filters input[type="range"]::-ms-fill-lower {
-  background: rgba(0, 123, 255, 0.3);
-}
-
-.filters input[type="range"]::-ms-fill-upper {
-  background: rgba(0, 123, 255, 0.3);
-}
-
-ul.list-unstyled {
-  list-style: none;
-  padding: 0;
-}
-
-ul.list-unstyled li {
-  margin-bottom: 10px;
-}
-
-ul.list-unstyled a,
-ul.list-unstyled button {
-  text-decoration: none;
-  display: inline-block;
-  padding: 10px 15px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-ul.list-unstyled button {
-  background-color: #dc3545;
-}
-
-ul.list-unstyled a:hover,
-ul.list-unstyled button:hover {
-  opacity: 0.9;
-}
-
-.btn-group {
-  display: flex;
-  gap: 10px; /* Adjust gap between buttons as needed */
-}
-
-@media screen and (max-width: 650px) {
-  .container {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .imgbox,
-  .filters {
-    flex: 1 1 100%;
-  }
-}
-
-.upload input {
-  display: none;
-}
-
-.upload label {
-  color: #fff;
-  padding: 8px 20px;
-  border: 2px white dashed;
-  cursor: pointer;
-}
-
-h1.text-center {
-  margin-top: 20px;
-  font-size: 4rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  background-image: linear-gradient(
-    135deg,
-    #007bff,
-    #dc3545
-  ); /* Gradient color */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
+.is-invalid {
+  border: red 2px solid;
+  background-color: rgba(255, 0, 0, 0.342);
 }
