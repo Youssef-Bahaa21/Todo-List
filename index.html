@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Editor</title>
+    <title>Todo List</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -12,114 +12,45 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <div class="container py-5 bg-dark">
-      <!-- Centered Header -->
-      <h1 class="text-center text-white mb-5">Image Editor</h1>
-
-      <div class="row align-items-center">
-        <!-- Upload Section -->
-        <div class="col-md-6 d-flex justify-content-center">
-          <div class="text-center">
-            <div class="imgbox mb-3">
-              <img id="img" class="img-fluid w-100" alt="Uploaded Image" />
-            </div>
-            <div class="upload">
-              <label for="upload" class="upload-label">Upload</label>
-              <input type="file" class="upload-input border" id="upload" />
-            </div>
+    <header class="py-4">
+      <h1 class="text-center text-white">Todo List</h1>
+    </header>
+    <section>
+      <div class="container my-5">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              id="taskInput"
+              placeholder="Add a new task"
+            />
+          </div>
+          <div class="col-md-6">
+            <select id="mySelect" class="form-select">
+              <option selected>All</option>
+              <option value="completed">Completed</option>
+              <option value="un-completed">Uncompleted</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search Task"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 text-center">
+            <button id="mybtn" class="btn btn-success mt-3">Add Todo</button>
           </div>
         </div>
 
-        <!-- Filters Section -->
-        <div class="col-md-6">
-          <div class="filters">
-            <label for="saturate" class="form-label">Saturate</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              max="200"
-              value="100"
-              id="saturate"
-            />
-            <label for="contrast" class="form-label">Contrast</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              max="200"
-              value="100"
-              id="contrast"
-            />
-            <label for="Brightness" class="form-label">Brightness</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              value="100"
-              max="200"
-              id="Brightness"
-            />
-            <label for="Sepia" class="form-label">Sepia</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              value="0"
-              max="5"
-              id="Sepia"
-            />
-            <label for="Grayscale" class="form-label">Grayscale</label>
-            <input
-              type="range"
-              step="0.1"
-              class="form-range"
-              min="0"
-              value="0"
-              max="1"
-              id="Grayscale"
-            />
-
-            <label for="blur" class="form-label">Blur</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              max="10"
-              value="0"
-              step="0.1"
-              id="blur"
-            />
-            <label for="hue-rotate" class="form-label">Hue-Rotate</label>
-            <input
-              type="range"
-              class="form-range"
-              min="0"
-              max="350"
-              id="hue-rotate"
-              value="0"
-            />
-            <div class="btn-group mt-3">
-              <a
-                href="#"
-                download="filtered-image.jpg"
-                id="download"
-                class="btn btn-primary"
-              >
-                Download
-              </a>
-              <button
-                onclick="resetvalues()"
-                class="btn btn-danger"
-                id="resetBtn"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
+        <div id="todosContainer" class="mt-5">
+          <div class="row gap-2"></div>
         </div>
       </div>
-    </div>
+    </section>
     <script src="javascript/bootstrap.bundle.min.js"></script>
     <script src="javascript/index.js"></script>
   </body>
