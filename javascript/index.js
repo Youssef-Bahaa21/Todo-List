@@ -1,123 +1,85 @@
-let myTask = document.getElementById("taskInput");
-let mySelect = document.getElementById("mySelect");
-let mysearchInput = document.getElementById("searchInput");
-let myBtn = document.getElementById("mybtn");
-let todosContainer = document.getElementById("todosContainer");
+let saturate = document.getElementById("saturate");
+let contrast = document.getElementById("contrast");
+let brightness = document.getElementById("Brightness");
+let sepia = document.getElementById("Sepia");
+let grayscale = document.getElementById("Grayscale");
+let blur = document.getElementById("blur");
+let hueRotate = document.getElementById("hue-rotate");
+let downloadBtn = document.getElementById("download");
+let uploadBtn = document.getElementById("upload");
+let img = document.getElementById("img");
+let imgbox = document.querySelector(".imgbox");
+let reset = document.getElementById("resetBtn");
 
-mysearchInput.addEventListener("input", function () {
-  const searchQuery = mysearchInput.value.toLowerCase().trim();
-  const filteredTasks = taskList.filter((task) =>
-    task.taskDetails.toLowerCase().includes(searchQuery)
-  );
-  displayFilteredTasks(filteredTasks);
-});
+window.onload = function () {
+  downloadBtn.style.display = "none";
+  reset.style.display = "none";
+  imgbox.style.display = "none";
+};
 
-function displayFilteredTasks(tasks) {
-  let cartona = "";
-  for (let i = 0; i < tasks.length; i++) {
-    cartona += `
-        <div class="col-md-6 mx-auto">
-          <div class="d-flex justify-content-between align-items-center bg-dark rounded p-3 mb-3 ${
-            tasks[i].isCompleted ? "completed" : ""
-          }">
-            <span class="text-white">${tasks[i].taskDetails}</span>
-            <div class="d-flex">
-              <button class="btn btn-success btn-sm mx-1" onclick="beCompleted('${
-                tasks[i].id
-              }')">
-                <i class="fa-solid fa-check"></i>
-              </button>
-              <button class="btn btn-danger btn-sm" onclick="deleteTask('${
-                tasks[i].id
-              }')">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-  }
-  todosContainer.innerHTML = cartona;
-}
-
-let taskList = [];
-if (localStorage.getItem("alltodos")) {
-  taskList = JSON.parse(localStorage.getItem("alltodos"));
-  displayTask();
-}
-
-function validateInput(input) {
-  var regex = /^[A-Z][A-Za-z0-9 ]*$/; // Updated regex
-  return regex.test(input) && input.trim().length > 0; // Ensure input is not empty
-}
-
-myBtn.addEventListener("click", function () {
-  if (!validateInput(myTask.value)) {
-    myTask.classList.add("is-invalid");
-    myTask.setAttribute(
-      "placeholder",
-      "Task must start with a capital letter and not be empty"
-    );
-    return;
-  }
-  myTask.classList.remove("is-invalid");
-  myTask.setAttribute("placeholder", ""); // Reset placeholder
-  let task = {
-    taskDetails: myTask.value,
-    isCompleted: mySelect.value == "completed" ? true : false,
-    id: `${Math.random() * 1000}`,
+uploadBtn.onchange = function () {
+  resetvalues();
+  downloadBtn.style.display = "block";
+  reset.style.display = "block";
+  imgbox.style.display = "block";
+  let file = new FileReader();
+  file.readAsDataURL(uploadBtn.files[0]);
+  file.onload = function () {
+    img.src = file.result;
+    applyFilters();
   };
-  taskList.push(task);
-  localStorage.setItem("alltodos", JSON.stringify(taskList));
-  displayTask();
-  console.log(taskList);
-  clear();
-});
+};
 
-function clear() {
-  myTask.value = "";
-  mySelect.value = "All";
+function applyFilters() {
+  img.style.filter = `
+    saturate(${saturate.value}%)
+    contrast(${contrast.value}%)
+    brightness(${brightness.value}%)
+    sepia(${sepia.value}%)
+    grayscale(${grayscale.value})
+    blur(${blur.value}px)
+    hue-rotate(${hueRotate.value}deg)
+  `;
 }
 
-function displayTask() {
-  let cartona = "";
-  for (let i = 0; i < taskList.length; i++) {
-    cartona += `
-      <div class="col-md-6 mx-auto">
-        <div class="d-flex justify-content-between align-items-center bg-dark rounded p-3 mb-3 ${
-          taskList[i].isCompleted ? "completed" : ""
-        }">
-          <span class="text-white">${taskList[i].taskDetails}</span>
-          <div class="d-flex">
-            <button class="btn btn-success btn-sm mx-1" onclick="beCompleted('${
-              taskList[i].id
-            }')">
-              <i class="fa-solid fa-check"></i>
-            </button>
-            <button class="btn btn-danger btn-sm" onclick="deleteTask('${
-              taskList[i].id
-            }')">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  document.getElementById("todosContainer").innerHTML = cartona;
-}
+saturate.oninput = applyFilters;
+contrast.oninput = applyFilters;
+brightness.oninput = applyFilters;
+sepia.oninput = applyFilters;
+grayscale.oninput = applyFilters;
+blur.oninput = applyFilters;
+hueRotate.oninput = applyFilters;
 
-function deleteTask(id) {
-  taskList = taskList.filter((task) => task.id !== id);
-  localStorage.setItem("alltodos", JSON.stringify(taskList));
-  displayTask();
-}
+downloadBtn.onclick = function () {
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
+  canvas.width = img.width;
+  canvas.height = img.height;
 
-function beCompleted(id) {
-  let task = taskList.find((task) => task.id === id);
-  if (task) {
-    task.isCompleted = true;
-    localStorage.setItem("alltodos", JSON.stringify(taskList));
-    displayTask();
-  }
+  ctx.filter = `
+    saturate(${saturate.value}%)
+    contrast(${contrast.value}%)
+    brightness(${brightness.value}%)
+    sepia(${sepia.value}%)
+    grayscale(${grayscale.value})
+    blur(${blur.value}px)
+    hue-rotate(${hueRotate.value}deg)
+  `;
+
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  let imageUrl = canvas.toDataURL("image/jpeg", 0.95); // Specify format and quality
+  downloadBtn.href = imageUrl;
+  downloadBtn.download = "filtered-image.jpg";
+};
+
+function resetvalues() {
+  img.style.filter = "none";
+  saturate.value = "100";
+  contrast.value = "100";
+  brightness.value = "100";
+  sepia.value = "0";
+  grayscale.value = "0";
+  blur.value = "0";
+  hueRotate.value = "0";
 }
